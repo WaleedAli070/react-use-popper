@@ -1,5 +1,6 @@
 import React, { FC, createContext, useState } from "react";
 import ReactDOM from "react-dom";
+import { PopperContainer } from "./popper.component";
 
 export interface Popper {
   close: () => void;
@@ -20,12 +21,13 @@ interface OpenOptions {
 type OpenFunc = (
   element: ((popper: Popper) => React.ReactNode) | React.ReactNode,
   options?: OpenOptions
-) => void;
+) => PrivatePopper | undefined;
 
 type CloseFunc = (popperId: string) => void;
 
 export interface PopperManager {
   open: OpenFunc;
+  close: CloseFunc;
 }
 
 export const PopperContext = createContext<PopperManager | undefined>(
@@ -66,6 +68,8 @@ export const PopperProvider: FC = ({ children }) => {
     };
 
     setPoppers(oldPoppers => [...oldPoppers, privatePopper]);
+
+    return privatePopper
   };
 
   const close: CloseFunc = popperId => {
@@ -73,11 +77,11 @@ export const PopperProvider: FC = ({ children }) => {
   };
 
   return (
-    <PopperContext.Provider value={{ open }}>
+    <PopperContext.Provider value={{ open, close }}>
       {children}
       {poppers.map(({ element, appendTo, id }) => (
         <React.Fragment key={id}>
-          {ReactDOM.createPortal(element, appendTo)}
+          {ReactDOM.createPortal(<PopperContainer>{element}</PopperContainer>, appendTo)}
         </React.Fragment>
       ))}
     </PopperContext.Provider>
