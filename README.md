@@ -1,13 +1,13 @@
-# react-tooltip
+# react-use-popper
 
 > React Hook to add tooltip to any element
 
-[![NPM](https://img.shields.io/npm/v/react-tooltip.svg)](https://www.npmjs.com/package/react-tooltip) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-use-popper.svg)](https://www.npmjs.com/package/react-use-popper) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install --save react-tooltip
+npm install --save react-use-popper
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install --save react-tooltip
 ```tsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-tooltip'
-import 'react-tooltip/dist/index.css'
+import MyComponent from 'react-use-popper'
+import 'react-use-popper/dist/index.css'
 
 class Example extends Component {
   render() {
