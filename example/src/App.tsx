@@ -1,10 +1,17 @@
 import React from 'react'
 
-import { ExampleComponent } from 'react-tooltip'
-import 'react-tooltip/dist/index.css'
+import { PopperProvider } from 'react-use-popper'
+import 'react-use-popper/dist/index.css'
+import ChidlComponent from './ChildComponent'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <>
+      <PopperProvider>
+        <ChidlComponent />
+      </PopperProvider>
+    </>
+  )
 }
 
 export default App
