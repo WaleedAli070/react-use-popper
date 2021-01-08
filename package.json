@@ -1,6 +1,6 @@
 {
   "name": "react-use-popper",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "React Hook to add tooltip to any element",
   "author": "WaleedAli070",
   "license": "MIT",
@@ -11,6 +11,15 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "react",
+    "portal",
+    "portals",
+    "hook",
+    "hooks",
+    "popper",
+    "typescript"
+  ],
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
