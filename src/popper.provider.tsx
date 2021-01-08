@@ -2,34 +2,7 @@ import React, { FC, createContext, useState } from "react";
 import ReactDOM from "react-dom";
 import { PopperContainer } from "./popper.component";
 import { randomIdGenerator } from "./popper.utils";
-
-export interface Popper {
-  close: () => void;
-}
-
-interface PrivatePopper {
-  element: React.ReactNode;
-  id: string;
-  appendTo: Element;
-}
-
-interface OpenOptions {
-  id?: string;
-  appendTo?: Element;
-  onClose?: () => void;
-}
-
-type OpenFunc = (
-  element: ((popper: Popper) => React.ReactNode) | React.ReactNode,
-  options?: OpenOptions
-) => PrivatePopper | undefined;
-
-type CloseFunc = (popperId: string) => void;
-
-export interface PopperManager {
-  open: OpenFunc;
-  close: CloseFunc;
-}
+import { PrivatePopper, Popper, PopperManager, OpenFunc, CloseFunc} from './popper.intefaces'
 
 export const PopperContext = createContext<PopperManager | undefined>(
   undefined
