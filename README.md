@@ -37,7 +37,7 @@ const ChidlComponent = () => {
   const { open } = usePopper()
 
   const handleClick = (e: React.MouseEvent) => {
-    open('Testing', { id: 'popper-id', appendTo: anchorEl })
+    open('Testing', { id: 'popper-id' })
   }
 
   return (
