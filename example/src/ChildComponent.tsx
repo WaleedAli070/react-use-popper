@@ -12,14 +12,13 @@ const ChidlComponent = () => {
   const [testingPopper, setTestingPopper] = useState<any>(false)
   const [anotherTestingPopper, setAnotherTestingPopper] = useState<any>(false)
 
-  const handleClick = (e: React.MouseEvent) => {
-    const anchorEl = getAnchorEl(e.currentTarget)
+  const handleClick = () => {
     if (testingPopper) {
       close(testingPopper.id)
       setTestingPopper(false)
       return
     }
-    setTestingPopper(open('Testing', { id: 'testing-id', appendTo: anchorEl }))
+    setTestingPopper(open('Testing'))
   }
   const handleAnotherClick = (e: React.MouseEvent) => {
     const anchorEl = getAnchorEl(e.currentTarget)
@@ -28,7 +27,7 @@ const ChidlComponent = () => {
       setAnotherTestingPopper(false)
       return
     }
-    setAnotherTestingPopper(open('Another Testing', { id: 'another-id', appendTo: anchorEl }))
+    setAnotherTestingPopper(open('Another Testing', { appendTo: anchorEl }))
   }
   return (
     <>
