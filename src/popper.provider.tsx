@@ -1,6 +1,7 @@
 import React, { FC, createContext, useState } from "react";
 import ReactDOM from "react-dom";
 import { PopperContainer } from "./popper.component";
+import { randomIdGenerator } from "./popper.utils";
 
 export interface Popper {
   close: () => void;
@@ -39,7 +40,7 @@ export const PopperProvider: FC = ({ children }) => {
 
   const open: OpenFunc = (element, options = {}) => {
     const {
-      id: popperId = 'default-popper-id',
+      id: popperId = randomIdGenerator(),
       appendTo = document.body,
       onClose
     } = options;
