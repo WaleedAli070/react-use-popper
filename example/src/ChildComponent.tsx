@@ -1,33 +1,16 @@
-import React, { ReactNode, useState } from 'react'
+import React from 'react'
 
 import { usePopper } from 'react-use-popper'
 import 'react-use-popper/dist/index.css'
 
-function getAnchorEl(anchorEl: ReactNode) {
-  return typeof anchorEl === 'function' ? anchorEl() : anchorEl;
-}
-
 const ChidlComponent = () => {
-  const { open, close } = usePopper()
-  const [testingPopper, setTestingPopper] = useState<any>(false)
-  const [anotherTestingPopper, setAnotherTestingPopper] = useState<any>(false)
-
-  const handleClick = () => {
-    if (testingPopper) {
-      close(testingPopper.id)
-      setTestingPopper(false)
-      return
-    }
-    setTestingPopper(open('Testing'))
+  const { togglePopper, showPopper } = usePopper('Popper 1')
+ 
+  const handleClick = (e: React.MouseEvent) => {
+    togglePopper(e)
   }
   const handleAnotherClick = (e: React.MouseEvent) => {
-    const anchorEl = getAnchorEl(e.currentTarget)
-    if (anotherTestingPopper) {
-      close(anotherTestingPopper.id)
-      setAnotherTestingPopper(false)
-      return
-    }
-    setAnotherTestingPopper(open('Another Testing', { appendTo: anchorEl }))
+    showPopper(e, 'Popper 2')
   }
   return (
     <>

@@ -34,10 +34,10 @@ import React, { Component } from 'react'
 import { usePopper } from "react-portal-hook";
 
 const ChidlComponent = () => {
-  const { open } = usePopper()
+  const { togglePopper } = usePopper('Popper 1')
 
   const handleClick = (e: React.MouseEvent) => {
-    open('Testing', { id: 'popper-id' })
+    togglePopper(e)
   }
 
   return (
