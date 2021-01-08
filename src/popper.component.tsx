@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React from 'react'
 import styles from './styles.module.css'
 
-export const PopperContainer: FC = ({ children }) => {
-  return (
-    <div role="tooltip" className={styles.popperContainer}>
-      {children}
-    </div>
-  )
-}
+type DivProps = React.ComponentPropsWithoutRef<'div'>
+
+export const PopperContainer = React.forwardRef<HTMLDivElement, DivProps>(({ children }, ref) => (
+  <div role="tooltip" className={styles.popperContainer} ref={ref}>
+    {children}
+  </div>
+))

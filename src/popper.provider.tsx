@@ -1,4 +1,4 @@
-import React, { FC, createContext, useState } from "react";
+import React, { FC, createContext, useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { PopperContainer } from "./popper.component";
 
@@ -36,6 +36,32 @@ export const PopperContext = createContext<PopperManager | undefined>(
 
 export const PopperProvider: FC = ({ children }) => {
   const [poppers, setPoppers] = useState<PrivatePopper[]>([]);
+  const popperRefs = useRef(new Array())
+  useEffect(() => {
+    /* 
+    * remove any null popperRefs. required because when we manually remove
+    * from popperRefs array the poppers array creates a null ref in it, until
+    * that item isn't removed (via setPoppers) from the popper array itself.
+    */
+    popperRefs.current = popperRefs.current.filter(ref => ref !== null)
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event: MouseEvent) {
+      poppers.map((popper, i) => {
+        if (popperRefs.current[i] && !popperRefs.current[i].contains(event.target as Node)) {
+          close(popper.id)
+        }
+      })
+    }
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+}, [poppers]);
 
   const open: OpenFunc = (element, options = {}) => {
     const {
@@ -43,7 +69,6 @@ export const PopperProvider: FC = ({ children }) => {
       appendTo = document.body,
       onClose
     } = options;
-
     // Skip if the popper already exists
     if (poppers.find(({ id }) => id === popperId)) return;
 
@@ -73,7 +98,9 @@ export const PopperProvider: FC = ({ children }) => {
   };
 
   const close: CloseFunc = popperId => {
+    const index = poppers.findIndex(({ id }) => id === popperId)
     setPoppers(oldPoppers => oldPoppers.filter(({ id }) => id !== popperId));
+    popperRefs.current.splice(index, 1)
   };
 
   return (
@@ -81,7 +108,7 @@ export const PopperProvider: FC = ({ children }) => {
       {children}
       {poppers.map(({ element, appendTo, id }) => (
         <React.Fragment key={id}>
-          {ReactDOM.createPortal(<PopperContainer>{element}</PopperContainer>, appendTo)}
+          {ReactDOM.createPortal(<PopperContainer ref={(element) => popperRefs.current.push(element)}>{element}</PopperContainer>, appendTo)}
         </React.Fragment>
       ))}
     </PopperContext.Provider>
