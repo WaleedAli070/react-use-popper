@@ -10,18 +10,41 @@
 npm install --save react-use-popper
 ```
 
-## Usage
+## Setup
+Wrap your root component with `PopperProvider`
+
+```tsx
+// app.jsx
+
+import { PopperProvider } from "react-use-popper";
+
+const App = () => {
+  return (
+    <PopperProvider>
+      <RootComponent />
+    </PopperProvider>
+  );
+};
+```
+
+## Basic Usage
 
 ```tsx
 import React, { Component } from 'react'
+import { usePopper } from "react-portal-hook";
 
-import MyComponent from 'react-use-popper'
-import 'react-use-popper/dist/index.css'
+const ChidlComponent = () => {
+  const { open } = usePopper()
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
+  const handleClick = (e: React.MouseEvent) => {
+    open('Testing', { id: 'popper-id', appendTo: anchorEl })
   }
+
+  return (
+    <>
+      <button onClick={handleClick}>Button</button>
+    </>
+  )
 }
 ```
 
