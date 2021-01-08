@@ -1,10 +1,11 @@
 {
   "name": "react-use-popper",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React Hook to add tooltip to any element",
   "author": "WaleedAli070",
   "license": "MIT",
   "repository": "WaleedAli070/react-use-popper",
+  "homepage": "https://github.com/WaleedAli070/react-use-popper",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
