@@ -1,7 +1,31 @@
-import { ExampleComponent } from '.'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import { ReactNode } from 'react'
+import { PopperProvider } from '.'
+import { TestHookWithoutContext, testPopperHook } from './popper.testUtils'
+import { usePopper } from './popper.hook'
 
-describe('ExampleComponent', () => {
+const renderChildrenInProvider = (child: ReactNode) => {
+  return render(
+    <PopperProvider>{child}</PopperProvider>
+  )
+}
+
+
+describe('Popper Provider', () => {
   it('is truthy', () => {
-    expect(ExampleComponent).toBeTruthy()
+    expect(PopperProvider).toBeTruthy()
+  })
+  it('renders children inside', () => {
+    renderChildrenInProvider('Testing Children')
+    expect(screen.getByText(/^Testing/)).toBeTruthy()
+  })
+})
+
+describe('usePopper Hook', () => {
+  it('throws error if not used inside of popper context', () => {
+    expect(() => {
+      render(<TestHookWithoutContext />)
+    }).toThrow()
   })
 })
