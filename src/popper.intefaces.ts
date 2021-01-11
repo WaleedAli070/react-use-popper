@@ -44,3 +44,21 @@ export interface PopperManager {
   open: OpenFunc;
   close: CloseFunc;
 }
+
+export interface PopperArgs {
+  defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode
+  defaultOptions?: PopperOptions
+}
+
+export interface PopperHookReturns {
+  togglePopper?: ToggleFunc
+  showPopper?: ShowFunc
+  hidePopper?: CloseFunc
+}
+
+export interface UsePopperHook {
+  (
+    defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode,
+    defaultOptions?: PopperOptions
+  ): PopperHookReturns | undefined
+}
