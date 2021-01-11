@@ -1,12 +1,8 @@
 import { render } from '@testing-library/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { usePopper } from './popper.hook'
+import { PopperArgs, PopperHookReturns } from './popper.intefaces'
 import { PopperProvider } from './popper.provider'
-
-const TestComponentUsingHook = ({ callback }: { callback: Function }) => {
-  callback()
-  return null
-}
 
 export const TestHookWithoutContext = () => {
   usePopper()
@@ -15,10 +11,16 @@ export const TestHookWithoutContext = () => {
   )
 }
 
-export const TestHookWithContext = (callback: Function) => {
-  return render(
+export const TestHookWithContext = (popperContent: ReactNode = 'Default Popper Content', hookHandler: string = 'togglePopper', handlerArgs: any[] = []) => {
+  const returnVal: PopperHookReturns = {}
+  function TestComponentUsingHook() {
+    Object.assign(returnVal, usePopper(popperContent))
+    return <button onClick={(e) => returnVal[hookHandler](e, ...handlerArgs)}>Dummy Button</button>
+  }
+  render(
     <PopperProvider>
-      <TestComponentUsingHook callback={callback} />
+      <TestComponentUsingHook />
     </PopperProvider>
   )
+  return returnVal
 }
