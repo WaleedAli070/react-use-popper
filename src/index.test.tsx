@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { PopperProvider } from '.'
-import { TestHookWithoutContext, testPopperHook } from './popper.testUtils'
+import { TestHookWithoutContext, TestHookWithContext } from './popper.testUtils'
 import { usePopper } from './popper.hook'
 
 const renderChildrenInProvider = (child: ReactNode) => {
@@ -27,5 +27,8 @@ describe('usePopper Hook', () => {
     expect(() => {
       render(<TestHookWithoutContext />)
     }).toThrow()
+  })
+  it('works fine with context', () => {
+    expect(TestHookWithContext(usePopper))
   })
 })
