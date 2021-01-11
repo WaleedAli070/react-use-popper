@@ -51,14 +51,14 @@ export interface PopperArgs {
 }
 
 export interface PopperHookReturns {
-  togglePopper?: ToggleFunc
-  showPopper?: ShowFunc
-  hidePopper?: CloseFunc
+  togglePopper: ToggleFunc
+  showPopper: ShowFunc
+  hidePopper: CloseFunc
 }
 
 export interface UsePopperHook {
   (
     defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode,
     defaultOptions?: PopperOptions
-  ): PopperHookReturns | undefined
+  ): PopperHookReturns
 }
