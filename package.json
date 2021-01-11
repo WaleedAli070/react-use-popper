@@ -1,6 +1,6 @@
 {
   "name": "react-use-popper",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React Hook to add tooltip to any element",
   "author": "WaleedAli070",
   "license": "MIT",
