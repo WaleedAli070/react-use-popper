@@ -8,7 +8,10 @@ export const usePopper: UsePopperHook = (defaultContent: ReactNode = 'Default Co
   const [popperTarget, setPopperTarget] = useState<Element | null>(null)
   const [popperContent, setPopperContent] = useState<ReactNode | null>(null)
   const context = useContext(PopperContext);
-
+  /**
+   * ToDO: Maybe, in case of erros, we can introduce an onError callback
+   * This will improve testability of the "expected" exceptions.
+   */
   if (!context) {
     throw new Error("usePopper must be used within a PopperProvider");
   }
@@ -26,7 +29,7 @@ export const usePopper: UsePopperHook = (defaultContent: ReactNode = 'Default Co
   }
   
   const hidePopper: CloseFunc = (popperId) => {
-    if (popperId !== popper.id) {
+    if (popper && popperId !== popper.id) {
       throw new Error("unmatched popper ID");
     }
     context.close(popperId)
