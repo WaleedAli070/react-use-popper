@@ -4,6 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-use-popper.svg)](https://www.npmjs.com/package/react-use-popper) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+[Demo](https://waleedali070.github.io/react-use-popper/)
 ## Install
 
 ```bash
@@ -52,7 +53,7 @@ const ChidlComponent = () => {
 
 ## `usePopper` Hook
 
-### `arguements`
+### arguements
 
 ##### `defaultContent`
 
@@ -82,7 +83,7 @@ gets extracted from the `event.currentTarget`, in case not provided.
 
 A callback that's fired when the popper gets closed.
 
-### `returns`
+### returns
 
 #### `togglePopper`
 
@@ -91,7 +92,9 @@ Easiest and Recommended to use, manages popper's open/close state internally.
 ##### args
 
 > `event: React.MouseEvent` | _required_
+
 > `content : ((popper: Popper) => React.ReactNode) | React.ReactNode` | _optional_ | defaults to `usePopper`'s `defaultContent`
+
 > `options: PopperOptions` | _optional_ | defaults to `usePopper`'s `defaultContent`
 
 #### `showPopper`
@@ -102,7 +105,9 @@ returns, Popper object containing `id` which will be needed to pass to `hidePopp
 ##### args
 
 > `event: React.MouseEvent` | _required_
+
 > `content : ((popper: Popper) => React.ReactNode) | React.ReactNode` | _optional_ | defaults to `usePopper`'s `defaultContent`
+
 > `options: PopperOptions` | _optional_ | defaults to `usePopper`'s `defaultContent`
 
 ##### returns
