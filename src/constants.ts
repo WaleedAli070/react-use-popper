@@ -1,7 +1,9 @@
-import { PopperOptions } from "./popper.intefaces";
+import { PopperOptions } from './popper.intefaces'
 
 export const Default_Hook_Options: PopperOptions = {
-  onError: (err) => { throw err }
+  onError: (err) => {
+    throw err
+  }
 }
 
 export const Default_Hook_Content: string = 'Default Content'

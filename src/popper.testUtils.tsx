@@ -7,16 +7,22 @@ import { PopperProvider } from './popper.provider'
 
 export const TestHookWithoutContext = () => {
   usePopper()
-  return (
-    <div>This component is using popper hook without popper provider</div>
-  )
+  return <div>This component is using popper hook without popper provider</div>
 }
 
-export const TestHookWithContext = (popperContent: ReactNode = Default_Hook_Content, hookHandler: string = 'togglePopper', handlerArgs: any[] = []) => {
+export const TestHookWithContext = (
+  popperContent: ReactNode = Default_Hook_Content,
+  hookHandler: string = 'togglePopper',
+  handlerArgs: any[] = []
+) => {
   const returnVal: PopperHookReturns | any = {}
   function TestComponentUsingHook() {
     Object.assign(returnVal, usePopper(popperContent))
-    return <button onClick={(e) => returnVal[hookHandler](e, ...handlerArgs)}>Dummy Button</button>
+    return (
+      <button onClick={(e) => returnVal[hookHandler](e, ...handlerArgs)}>
+        Dummy Button
+      </button>
+    )
   }
   render(
     <PopperProvider>
