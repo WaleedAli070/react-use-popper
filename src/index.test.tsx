@@ -53,10 +53,7 @@ describe('usePopper Hook', () => {
     fireEvent.click(screen.getByText('Dummy Button'))
   })
   it('hidePopper returns an error if popper with provided id is not found', () => {
-    TestHookWithContext('Show Popper Content', 'hidePopper', ['randomId'])
-    fireEvent.click(screen.getByText('Dummy Button'))
-    // ToDO: Not able to find a way to catch exception here, can't use `toThrow`
-    // function is not throwing. will have to think about some other way.
-    expect(() => fireEvent.click(screen.getByText('Dummy Button'))).toBeTruthy()
+    const popper = TestHookWithContext('Show Popper Content', 'hidePopper', ['randomId'])
+    expect(() => popper.hidePopper('asd')).toThrow()
   })
 })
