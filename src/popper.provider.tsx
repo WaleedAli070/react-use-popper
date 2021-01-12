@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { PopperContainer } from "./popper.component";
 import { randomIdGenerator } from "./popper.utils";
 import { PrivatePopper, Popper, PopperManager, OpenFunc, CloseFunc} from './popper.intefaces'
+import { Errors } from "./constants";
 
 export const PopperContext = createContext<PopperManager | undefined>(
   undefined
@@ -22,7 +23,7 @@ export const PopperProvider: FC = ({ children }) => {
     if (poppers.find(({ id }) => id === popperId)) return;
 
     if (!appendTo) {
-      throw new Error("Trying to open a popper in a nonexistent DOM node");
+      throw new Error(Errors.appendToNotFound);
     }
 
     const popper: Popper = {
