@@ -58,10 +58,12 @@ export const PopperProvider: FC = ({ children }) => {
   return (
     <PopperContext.Provider value={{ open, close }}>
       {children}
-      {poppers.map(({ element, appendTo, id }) => (
+      {poppers.map(({ element, appendTo, id, placement }) => (
         <React.Fragment key={`popper-portals-${id}`}>
           {ReactDOM.createPortal(
-            <PopperContainer>{element}</PopperContainer>,
+            <PopperContainer appendTo={appendTo} placement={placement}>
+              {element}
+            </PopperContainer>,
             appendTo
           )}
         </React.Fragment>
