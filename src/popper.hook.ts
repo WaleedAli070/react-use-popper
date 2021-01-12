@@ -2,18 +2,17 @@ import { ReactNode, useContext, useState } from "react";
 import { PopperContext } from "./popper.provider";
 import { getAnchorEl } from "./popper.utils";
 import { CloseFunc, PopperOptions, ShowFunc, ToggleFunc, UsePopperHook } from './popper.intefaces'
+import { Default_Hook_Content, Default_Hook_Options, Errors } from "./constants";
 
-export const usePopper: UsePopperHook = (defaultContent: ReactNode = 'Default Content', defaultOptions: PopperOptions = {}) => {
+export const usePopper: UsePopperHook = (defaultContent: ReactNode = Default_Hook_Content, defaultOptions: PopperOptions = Default_Hook_Options) => {
   const [popper, setPopper] = useState<any>(false)
   const [popperTarget, setPopperTarget] = useState<Element | null>(null)
   const [popperContent, setPopperContent] = useState<ReactNode | null>(null)
   const context = useContext(PopperContext);
-  /**
-   * ToDO: Maybe, in case of erros, we can introduce an onError callback
-   * This will improve testability of the "expected" exceptions.
-   */
   if (!context) {
-    throw new Error("usePopper must be used within a PopperProvider");
+    const error = new Error(Errors.providerNotFound)
+    defaultOptions.onError && defaultOptions.onError(error)
+    throw error;
   }
 
   const showPopper: ShowFunc = (event, content = defaultContent, options = defaultOptions) => {
@@ -29,8 +28,10 @@ export const usePopper: UsePopperHook = (defaultContent: ReactNode = 'Default Co
   }
   
   const hidePopper: CloseFunc = (popperId) => {
-    if (popper && popperId !== popper.id) {
-      throw new Error("unmatched popper ID");
+    if (!popper || popperId !== popper.id) {
+      const error = new Error(Errors.unmatchedID)
+      defaultOptions.onError && defaultOptions.onError(error)
+      throw error;
     }
     context.close(popperId)
     setPopper(false)

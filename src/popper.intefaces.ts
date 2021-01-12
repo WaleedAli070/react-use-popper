@@ -12,6 +12,7 @@ export interface PopperOptions {
   id?: string;
   appendTo?: Element;
   onClose?: () => void;
+  onError?: ErrorFunc
 }
 
 export interface OpenFunc {
@@ -40,6 +41,11 @@ export interface ToggleFunc {
     options?: PopperOptions
   ): void;
 }
+
+export interface ErrorFunc {
+  (err: Error): Error | void
+}
+
 export interface PopperManager {
   open: OpenFunc;
   close: CloseFunc;
