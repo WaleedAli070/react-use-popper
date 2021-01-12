@@ -1,10 +1,17 @@
-# react-use-popper
+# React Popper Hook
 
 > React Hook to add tooltip to any element
 
 [![NPM](https://img.shields.io/npm/v/react-use-popper.svg)](https://www.npmjs.com/package/react-use-popper) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+React Popper is a low level react hook (along with a provider) to add all kinds of absolutely positioned poppers which are added to the target element via `React.createPortal`.
+
+It identifies the target element (the one to which popper gets appended to), via the `event.currentTarget` (in case, it's not provided in the `options` to the `usePopper`) and calculates the positioning of the popper internally using a few inline styles, hence, does not have any dependency on any other styling library.
+
+UsePopper Hook exposes `togglePopper`, `showPopper` and `hidePopper` callbacks to the consume/client which can be called in response to different `MouseEvent`s. The Hook manages the `open/close` state of the popper internally, and therefore, `togglePopper` is the recommend way to use, and should be enough for most of the use cases. But if the consumer really wants to manage the `open/close` manually, then he may use a combination of `showPopper` and `hidePopper` callbacks.
+
 [Demo](https://waleedali070.github.io/react-use-popper/)
+
 ## Install
 
 ```bash
@@ -12,27 +19,28 @@ npm install --save react-use-popper
 ```
 
 ## Setup
+
 Wrap your root component with `PopperProvider`
 
 ```tsx
 // app.jsx
 
-import { PopperProvider } from "react-use-popper";
+import { PopperProvider } from 'react-use-popper'
 
 const App = () => {
   return (
     <PopperProvider>
       <RootComponent />
     </PopperProvider>
-  );
-};
+  )
+}
 ```
 
 ## Basic Usage
 
 ```tsx
 import React, { Component } from 'react'
-import { usePopper } from "react-portal-hook";
+import { usePopper } from 'react-portal-hook'
 
 const ChidlComponent = () => {
   const { togglePopper } = usePopper('Popper 1')
@@ -44,6 +52,34 @@ const ChidlComponent = () => {
   return (
     <>
       <button onClick={handleClick}>Button</button>
+    </>
+  )
+}
+```
+
+## Multiple Poppers
+
+If you want to have multiple poppers open at same time, it's recommended to use multiple hooks, e.g:
+
+```tsx
+import React, { Component } from 'react'
+import { usePopper } from 'react-portal-hook'
+
+const ChidlComponent = () => {
+  const popper1 = usePopper('Popper 1')
+  const popper2 = usePopper('Popper 2')
+
+  const handleClick = (e: React.MouseEvent) => {
+    popper1.togglePopper(e)
+  }
+  const handleAnotherClick = (e: React.MouseEvent) => {
+    popper2.togglePopper(e)
+  }
+
+  return (
+    <>
+      <button onClick={handleClick}>Button</button>
+      <button onClick={handleAnotherClick}>Another Button</button>
     </>
   )
 }
@@ -131,7 +167,7 @@ interface PopperArgs {
   /**
    * The react element you want to render in the popper
    */
-  defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode;
+  defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode
   defaultOptions?: PopperOptions
 }
 ```
@@ -140,20 +176,20 @@ interface PopperArgs {
 
 ```typescript
 interface PopperOptions {
-    /**
-    * An ID to avoid duplicate poppers
-    * generates randomly by default, if no id is provided
-    */
-    id?: string;
-    /**
-    * A DOM node in which to render the popper
-    * gets extracted by the `event`, in case not provided
-    */
-    appendTo?: Element;
-    /**
-    * A callback that is fired when the popper closes
-    */
-    onClose?: () => void;
+  /**
+   * An ID to avoid duplicate poppers
+   * generates randomly by default, if no id is provided
+   */
+  id?: string
+  /**
+   * A DOM node in which to render the popper
+   * gets extracted by the `event`, in case not provided
+   */
+  appendTo?: Element
+  /**
+   * A callback that is fired when the popper closes
+   */
+  onClose?: () => void
 }
 ```
 
@@ -162,17 +198,17 @@ interface PopperOptions {
 ```typescript
 interface PrivatePopper {
   /**
-  * Popper Content Element 
-  */
-  element: React.ReactNode;
+   * Popper Content Element
+   */
+  element: React.ReactNode
   /**
-  * Popper ID, need to pass this id while closing  
-  */
-  id: string;
+   * Popper ID, need to pass this id while closing
+   */
+  id: string
   /**
-  * Popper Container Element to which Popper is appended to
-  */
-  appendTo: Element;
+   * Popper Container Element to which Popper is appended to
+   */
+  appendTo: Element
 }
 ```
 
