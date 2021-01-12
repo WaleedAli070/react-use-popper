@@ -1,6 +1,7 @@
 import { PopperOptions } from './popper.intefaces'
 
 export const Default_Hook_Options: PopperOptions = {
+  placement: 'bottom',
   onError: (err) => {
     throw err
   }

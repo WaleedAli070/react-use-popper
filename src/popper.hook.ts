@@ -55,7 +55,7 @@ export const usePopper: UsePopperHook = (
   const togglePopper: ToggleFunc = (
     event: React.MouseEvent,
     content: ReactNode = defaultContent,
-    options: any = defaultOptions
+    options: PopperOptions = defaultOptions
   ) => {
     const appendTo = getAnchorEl(event.currentTarget)
     const isTargetChanged = appendTo !== popperTarget

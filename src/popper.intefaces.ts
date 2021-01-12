@@ -6,11 +6,13 @@ export interface PrivatePopper {
   element: React.ReactNode
   id: string
   appendTo: Element
+  placement?: string
 }
 
 export interface PopperOptions {
   id?: string
   appendTo?: Element
+  placement?: string
   onClose?: () => void
   onError?: ErrorFunc
 }
@@ -67,4 +69,9 @@ export interface UsePopperHook {
     defaultContent?: ((popper: Popper) => React.ReactNode) | React.ReactNode,
     defaultOptions?: PopperOptions
   ): PopperHookReturns
+}
+
+export interface PopperContainerProps {
+  appendTo: Element
+  placement?: string
 }
