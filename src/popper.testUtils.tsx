@@ -5,6 +5,10 @@ import { usePopper } from './popper.hook'
 import { PopperHookReturns } from './popper.intefaces'
 import { PopperProvider } from './popper.provider'
 
+export const TestChildrenRenderInProvider = (child: ReactNode) => {
+  return render(<PopperProvider>{child}</PopperProvider>)
+}
+
 export const TestHookWithoutContext = () => {
   usePopper()
   return <div>This component is using popper hook without popper provider</div>

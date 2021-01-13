@@ -1,12 +1,11 @@
 import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { ReactNode } from 'react'
 import { PopperProvider } from '.'
-import { TestHookWithoutContext, TestHookWithContext } from './popper.testUtils'
-
-const renderChildrenInProvider = (child: ReactNode) => {
-  return render(<PopperProvider>{child}</PopperProvider>)
-}
+import {
+  TestHookWithoutContext,
+  TestHookWithContext,
+  TestChildrenRenderInProvider
+} from './popper.testUtils'
 
 describe('Popper Provider', () => {
   it('is truthy', () => {
@@ -14,7 +13,7 @@ describe('Popper Provider', () => {
   })
 
   it('renders children inside', () => {
-    renderChildrenInProvider('Testing Children')
+    TestChildrenRenderInProvider('Testing Children')
     expect(screen.getByText(/^Testing/)).toBeTruthy()
   })
 })
