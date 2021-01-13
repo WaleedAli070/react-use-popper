@@ -40,7 +40,7 @@ const App = () => {
 
 ```tsx
 import React, { Component } from 'react'
-import { usePopper } from 'react-portal-hook'
+import { usePopper } from 'react-use-popper'
 
 const ChidlComponent = () => {
   const { togglePopper } = usePopper('Popper 1')
@@ -63,7 +63,7 @@ If you want to have multiple poppers open at same time, it's recommended to use 
 
 ```tsx
 import React, { Component } from 'react'
-import { usePopper } from 'react-portal-hook'
+import { usePopper } from 'react-use-popper'
 
 const ChidlComponent = () => {
   const popper1 = usePopper('Popper 1')
